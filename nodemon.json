@@ -2,6 +2,7 @@
     "env": {
         "MONGO_USER": "aftabumer",
         "MONGO_PASSWORD": "zzRpyGryU8QOMUs8",
-        "MONGO_DB": "social-media-app"
+        "MONGO_DB": "social-media-app",
+        "SECRET_KEY": "some very super secret key"
     }
 }
