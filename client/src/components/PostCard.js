@@ -25,7 +25,7 @@ const PostCard = ({
       </Card.Content>
       <Card.Content extra>
         <Button as="div" labelPosition="right" onClick={likeOnPost}>
-          <Button color="teal">
+          <Button color="teal" basic>
             <Icon name="heart" />
           </Button>
           <Label basic color="teal" pointing="left">
@@ -33,7 +33,7 @@ const PostCard = ({
           </Label>
         </Button>
         <Button as="div" labelPosition="right" onClick={commentOnPost}>
-          <Button color="teal">
+          <Button color="blue" basic>
             <Icon name="comment" />
           </Button>
           <Label basic color="blue" pointing="left">
