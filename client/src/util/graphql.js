@@ -57,4 +57,33 @@ const LOGIN_USER_MUTATION = gql`
     }
   }
 `;
-export { FETCH_POSTS_QUERY, REGISTER_USER_MUTATION, LOGIN_USER_MUTATION };
+const CREATE_POST_MUTATION = gql`
+  mutation createPost($body: String!) {
+    createPost(body: $body) {
+      id
+      body
+      createdAt
+      username
+      likes {
+        id
+        username
+        createdAt
+      }
+      likeCount
+      comments {
+        id
+        body
+        username
+        createdAt
+      }
+      commentCount
+    }
+  }
+`;
+
+export {
+  FETCH_POSTS_QUERY,
+  REGISTER_USER_MUTATION,
+  LOGIN_USER_MUTATION,
+  CREATE_POST_MUTATION,
+};

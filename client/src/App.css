@@ -9,3 +9,11 @@
   width: 50%;
   margin: 0 auto;
 }
+
+.text-area-container {
+  text-align: right;
+}
+.post-submit-btn {
+  margin-top: 1em !important;
+  width: 50%;
+}
