@@ -4,17 +4,21 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import { Home, Login, Register } from "./pages";
 import MenuBar from "./components/MenuBar";
+import { AuthProvider } from "./context/auth";
+import PrivateRoute from "./util/PrivateRoute";
 
 function App() {
   return (
-    <Router>
-      <Container>
-        <MenuBar />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Container>
+          <MenuBar />
+          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/login" component={Login} />
+          <PrivateRoute exact path="/register" component={Register} />
+        </Container>
+      </Router>
+    </AuthProvider>
   );
 }
 
