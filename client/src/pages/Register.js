@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Button, Form } from "semantic-ui-react";
 import { REGISTER_USER_MUTATION } from "../util/graphql";
 import { useForm } from "../util/hooks";
+import { AuthContext } from "../context/auth";
 
 const Register = ({ history }) => {
   const [errors, setErrors] = useState({});
+
+  const context = useContext(AuthContext);
 
   const { onChange, onSubmit, values } = useForm(registerUser, {
     username: "",
@@ -15,12 +18,15 @@ const Register = ({ history }) => {
   });
 
   const [addUser, { loading }] = useMutation(REGISTER_USER_MUTATION, {
-    update(_, result) {
+    update(_, { data: { register: userData } }) {
+      context.login(userData);
       history.push("/");
     },
     onError(err) {
-      console.log(err.graphQLErrors[0].extensions);
+      console.log("Errors: ", err?.graphQLErrors[0]?.extensions);
       setErrors(err.graphQLErrors[0].extensions.errors);
+
+      // setErrors(err?.graphQLErrors[0]?.extensions?.exception?.errors);
     },
     variables: values,
   });
@@ -61,6 +67,7 @@ const Register = ({ history }) => {
                 }
               : false
           }
+          // error={errors["email"] ? true : false}
         />
         <Form.Input
           label="Password"
