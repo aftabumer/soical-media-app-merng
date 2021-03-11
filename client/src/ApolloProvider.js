@@ -12,7 +12,7 @@ const httpLink = createHttpLink({
   uri: "http://localhost:5000/",
 });
 
-const authLink = setContext((request, previousContext) => {
+const authLink = setContext(() => {
   const token = localStorage.getItem("jwtToken");
   return {
     headers: {

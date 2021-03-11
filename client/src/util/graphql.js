@@ -22,6 +22,28 @@ const FETCH_POSTS_QUERY = gql`
   }
 `;
 
+const FETCH_POST_BY_ID_QUERY = gql`
+  query getPost($postId: ID!) {
+    getPost(postId: $postId) {
+      id
+      body
+      createdAt
+      username
+      likeCount
+      likes {
+        username
+      }
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`;
+
 const REGISTER_USER_MUTATION = gql`
   mutation register(
     $username: String!
@@ -57,6 +79,7 @@ const LOGIN_USER_MUTATION = gql`
     }
   }
 `;
+
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
@@ -94,10 +117,18 @@ const LIKE_POST_MUTATION = gql`
   }
 `;
 
+const DELETE_POST_BY_ID_MUTATION = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`;
+
 export {
   FETCH_POSTS_QUERY,
+  FETCH_POST_BY_ID_QUERY,
   REGISTER_USER_MUTATION,
   LOGIN_USER_MUTATION,
   CREATE_POST_MUTATION,
   LIKE_POST_MUTATION,
+  DELETE_POST_BY_ID_MUTATION,
 };

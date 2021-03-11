@@ -59,6 +59,7 @@ const PostForm = () => {
           type="Submit"
           color="teal"
           className="post-submit-btn"
+          floated="right"
           // loading={loading ? true : false}
         >
           Submit
