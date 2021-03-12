@@ -17,6 +17,7 @@ import {
 import { AuthContext } from "../context/auth";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
+import ToolTip from "../components/ToolTip";
 
 const SinglePost = ({ history, match }) => {
   const postId = match.params.postId;
@@ -81,18 +82,21 @@ const SinglePost = ({ history, match }) => {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("Comment on post")}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
+                <ToolTip content="Comment on post">
+                  <Button
+                    as="div"
+                    labelPosition="right"
+                    onClick={() => console.log("Comment on post")}
+                  >
+                    <Button basic color="blue">
+                      <Icon name="comments" />
+                    </Button>
+                    <Label basic color="blue" pointing="left">
+                      {commentCount}
+                    </Label>
                   </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                </ToolTip>
+
                 {user && user.username === username && (
                   <DeleteButton
                     postId={id}
@@ -125,28 +129,6 @@ const SinglePost = ({ history, match }) => {
                       </Button>
                     </div>
                   </Form>
-                  {/* <Form
-                    onSubmit={submitComment}
-                    className={loading ? "loading" : ""}
-                  >
-                    <Form.Input
-                      name="comment"
-                      type="text"
-                      placeholder="Comment.."
-                      value={comment}
-                      style={{ width: "100%" }}
-                      onChange={(event) => setComment(event.target.value)}
-                    />
-                    <Button
-                      type="Submit"
-                      color="teal"
-                      floated="right"
-                      disabled={comment.trim() === ""}
-                      loading={loading ? true : false}
-                    >
-                      Submit
-                    </Button>
-                  </Form> */}
                 </Card.Content>
               </Card>
             )}

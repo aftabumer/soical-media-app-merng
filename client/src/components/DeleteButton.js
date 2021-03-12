@@ -6,6 +6,7 @@ import {
   FETCH_POSTS_QUERY,
   DELETE_COMMENT_BY_ID_MUTATION,
 } from "../util/graphql";
+import ToolTip from "./ToolTip";
 
 const DeleteButton = ({ postId, commentId, callBack }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -38,14 +39,17 @@ const DeleteButton = ({ postId, commentId, callBack }) => {
   });
   return (
     <>
-      <Button
-        as="div"
-        color="red"
-        floated="right"
-        onClick={() => setConfirmOpen(true)}
-      >
-        <Icon name="trash" style={{ margin: 0 }} />
-      </Button>
+      <ToolTip content={commentId ? "Delete comment" : "Delete post"}>
+        <Button
+          as="div"
+          color="red"
+          floated="right"
+          onClick={() => setConfirmOpen(true)}
+        >
+          <Icon name="trash" style={{ margin: 0 }} />
+        </Button>
+      </ToolTip>
+
       <Confirm
         open={confirmOpen}
         onConfirm={deletePostOrMutation}

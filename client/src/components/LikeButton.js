@@ -3,6 +3,7 @@ import { Button, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LIKE_POST_MUTATION } from "../util/graphql";
+import ToolTip from "./ToolTip";
 
 const LikeButton = ({ post: { id, likes, likeCount }, user }) => {
   const [liked, setLiked] = useState(false);
@@ -35,7 +36,10 @@ const LikeButton = ({ post: { id, likes, likeCount }, user }) => {
 
   return (
     <Button as="div" labelPosition="right" onClick={likePost}>
-      {likeButton}
+      <ToolTip content={liked ? "Unlike post" : "Like post"}>
+        {likeButton}
+      </ToolTip>
+
       <Label basic color="teal" pointing="left">
         {likeCount}
       </Label>
