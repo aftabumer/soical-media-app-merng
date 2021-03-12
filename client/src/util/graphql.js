@@ -123,6 +123,36 @@ const DELETE_POST_BY_ID_MUTATION = gql`
   }
 `;
 
+const DELETE_COMMENT_BY_ID_MUTATION = gql`
+  mutation deleteComment($postId: ID!, $commentId: ID!) {
+    deleteComment(postId: $postId, commentId: $commentId) {
+      id
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+      commentCount
+    }
+  }
+`;
+
+const SUBMIT_COMMENT_MUTATION = gql`
+  mutation createComment($postId: ID!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
+      id
+      comments {
+        id
+        body
+        username
+        createdAt
+      }
+      commentCount
+    }
+  }
+`;
+
 export {
   FETCH_POSTS_QUERY,
   FETCH_POST_BY_ID_QUERY,
@@ -131,4 +161,6 @@ export {
   CREATE_POST_MUTATION,
   LIKE_POST_MUTATION,
   DELETE_POST_BY_ID_MUTATION,
+  DELETE_COMMENT_BY_ID_MUTATION,
+  SUBMIT_COMMENT_MUTATION,
 };
