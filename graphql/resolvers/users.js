@@ -7,6 +7,7 @@ const {
   validateLoginInput,
 } = require("../../util/validators");
 const User = require("../../models/User");
+const { SECRET_KEY } = require("../../config");
 
 function generateToken(user) {
   return jwt.sign(
@@ -15,7 +16,7 @@ function generateToken(user) {
       email: user.email,
       username: user.username,
     },
-    process.env.SECRET_KEY,
+    SECRET_KEY,
     { expiresIn: "1h" }
   );
 }
